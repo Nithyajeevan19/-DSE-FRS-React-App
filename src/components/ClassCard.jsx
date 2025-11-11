@@ -1,21 +1,37 @@
+// src/components/ClassCard.jsx (SUPERB UI)
 import { GraduationCap, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+// Mapping for better, consistent gradients instead of simple bg-colors
+const colorMap = {
+    1: { gradient: 'from-blue-500 to-indigo-600', iconBg: 'bg-blue-100', iconColor: 'text-blue-700' },
+    2: { gradient: 'from-purple-500 to-pink-600', iconBg: 'bg-purple-100', iconColor: 'text-purple-700' },
+    3: { gradient: 'from-green-500 to-teal-600', iconBg: 'bg-green-100', iconColor: 'text-green-700' },
+    4: { gradient: 'from-orange-500 to-red-600', iconBg: 'bg-orange-100', iconColor: 'text-red-700' },
+};
 
 export default function ClassCard({ cls, onClick }) {
-  return (
-    <div
-      className={`flex items-center rounded-xl ${cls.bgColor} p-4 shadow cursor-pointer hover:scale-105 transition-all`}
-      onClick={onClick}
-    >
-      <span className={`rounded-full p-3 ${cls.iconColor} bg-white shadow mr-4`}>
-        <GraduationCap size={28} />
-      </span>
-      <div className="flex-1 min-w-0">
-        <div className="text-xs text-gray-500">Class</div>
-        <div className="text-lg font-bold truncate">{cls.name}</div>
-        <div className="text-xs text-gray-500">Total</div>
-        <div className="text-blue-600 font-semibold">{cls.total}</div>
-      </div>
-      <ChevronRight size={24} className="ml-3 text-gray-400" />
-    </div>
-  );
+    const theme = colorMap[cls.id] || colorMap[1]; // Fallback to blue
+    
+    return (
+        <motion.div
+            className={`flex items-center rounded-2xl p-5 shadow-2xl transition-all duration-300 cursor-pointer 
+                        bg-gradient-to-br ${theme.gradient} text-white 
+                        hover:scale-[1.02] hover:shadow-indigo-500/40`}
+            onClick={onClick}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+        >
+            <span className={`rounded-full p-3 shadow-inner mr-5 ${theme.iconBg} ${theme.iconColor}`}>
+                <GraduationCap size={32} />
+            </span>
+            <div className="flex-1 min-w-0">
+                <div className="text-sm font-light opacity-90">Class Name</div>
+                <div className="text-xl font-extrabold truncate drop-shadow-sm">{cls.name}</div>
+                <div className="text-sm font-light mt-1">Total Students</div>
+                <div className="text-2xl font-bold text-yellow-300">{cls.total}</div>
+            </div>
+            <ChevronRight size={30} className="ml-3 text-white/70" />
+        </motion.div>
+    );
 }

@@ -4,6 +4,8 @@ import SearchBar from '../components/SearchBar';
 import { classes } from '../data/mockData';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import SparkleOverlay from '../components/SparkleOverlay';
 
 export default function ClassList() {
   const [query, setQuery] = useState('');
@@ -13,26 +15,44 @@ export default function ClassList() {
   );
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-tr from-blue-100 to-white relative overflow-hidden">
       <Header />
-      <main className="flex-1 flex flex-col items-center px-2 py-6">
-        <h2 className="text-xl font-bold mb-4">Student Attendance</h2>
+      <SparkleOverlay count={18}/>
+      <motion.main
+        className="flex-1 flex flex-col items-center px-2 py-10 z-10 relative"
+        initial={{ opacity: 0, scale: 0.97, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ type: 'spring', delay: 0.19, bounce: 0.45 }}
+      >
+        <h2 className="text-3xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-purple-400">
+          Student Attendance
+        </h2>
         <SearchBar
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search by class name"
         />
-        <div className="w-full max-w-md space-y-4 mt-6">
-          {filtered.map(cls => (
-            <ClassCard
+        <motion.div 
+          className="w-full max-w-lg space-y-6 mt-8"
+          initial="hidden"
+          animate="visible"
+        >
+          {filtered.map((cls, i) => (
+            <motion.div
               key={cls.id}
-              cls={cls}
-              onClick={() => navigate(`/student-attendance/${cls.id}`)}
-            />
+              initial={{ opacity: 0, y: 30, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ delay: i * 0.12, duration: 0.6, type: "spring" }}
+            >
+              <ClassCard
+                cls={cls}
+                onClick={() => navigate(`/student-attendance/${cls.id}`)}
+              />
+            </motion.div>
           ))}
-        </div>
-      </main>
-      <footer className="text-right text-xs text-gray-400 py-2 px-4">
+        </motion.div>
+      </motion.main>
+      <footer className="text-right text-xs text-gray-400 py-2 px-4 z-10 relative">
         V 1.0.6
       </footer>
     </div>

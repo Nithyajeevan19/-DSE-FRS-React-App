@@ -27,8 +27,11 @@ export default function Dashboard() {
     }
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-50">
-            <p className="text-xl text-red-500">Welcome, {user.email}. Role not mapped to a view.</p>
-        </div>
+       
+  <div className="flex justify-center items-center min-h-screen bg-gray-50 px-2 sm:px-0">
+    <p className="text-base sm:text-xl text-red-500 text-center">Welcome, {user.email}. Role not mapped to a view.</p>
+  </div>
+);
+
     );
 }

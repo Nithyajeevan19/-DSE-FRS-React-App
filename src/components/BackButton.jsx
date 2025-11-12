@@ -15,13 +15,15 @@ export default function BackButton({ to = -1, label = 'Back' }) {
 
   return (
     <motion.button
-      whileHover={{ scale: 1.05, x: -3 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={handleBack}
-      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold shadow-lg hover:shadow-indigo-500/40 transition-all duration-200"
-    >
-      <ChevronLeft size={20} className="animate-pulse-slow" />
-      <span>{label}</span>
-    </motion.button>
+  whileHover={{ scale: 1.05, x: -3 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={handleBack}
+  // Responsive: mobile padding, text size, icon size, gap
+  className="flex items-center gap-1 md:gap-2 px-2 md:px-4 py-1.5 md:py-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 text-xs md:text-base text-white font-semibold shadow-lg hover:shadow-indigo-500/40 transition-all duration-200"
+>
+  <ChevronLeft size={16} className="md:size-[20px] animate-pulse-slow" />
+  <span>{label}</span>
+</motion.button>
+
   );
 }

@@ -75,7 +75,6 @@ export default function Login() {
             <option value="" disabled>
               Select Role
             </option>
-            <option value="admin">Admin</option>
             <option value="faculty">Faculty</option>
             <option value="student">Student</option>
           </select>

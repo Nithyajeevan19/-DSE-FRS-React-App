@@ -18,7 +18,6 @@ export default function ClassList() {
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-blue-100 to-white relative overflow-hidden">
-      <Header />
       <SparkleOverlay count={18}/>
       <motion.main
         className="flex-1 flex flex-col items-center px-2 py-10 z-10 relative"

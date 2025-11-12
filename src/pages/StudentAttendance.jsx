@@ -1,6 +1,6 @@
 // src/pages/StudentAttendance.jsx
 import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
+
 import SearchBar from '../components/SearchBar';
 import StudentCard from '../components/StudentCard';
 import StudentProfileModal from '../components/StudentProfileModal';

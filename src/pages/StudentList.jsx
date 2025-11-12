@@ -27,7 +27,7 @@ export default function StudentList() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Header />
+
       <motion.main
         className="flex-1 flex flex-col items-center px-4 py-10 z-10 relative"
         initial={{ opacity: 0, y: 30 }}

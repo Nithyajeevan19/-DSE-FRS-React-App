@@ -19,12 +19,6 @@ const Home = () => {
           <h2 className="font-semibold text-xl">Faculty</h2>
           <p>Monitor faculty attendance and reports</p>
         </div>
-        <div className="home-card cursor-pointer text-center shadow-lg rounded-2xl p-8 bg-white"
-          onClick={() => navigate("/admin")}>
-          <img src="/images/admin.png" alt="Admin" className="w-24 h-24 mx-auto mb-3" />
-          <h2 className="font-semibold text-xl">Admin</h2>
-          <p>Admin dashboard & settings</p>
-        </div>
       </div>
     </div>
   );

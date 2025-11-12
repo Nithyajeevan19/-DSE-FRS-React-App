@@ -5,6 +5,7 @@ import SearchBar from '../components/SearchBar';
 import StudentCard from '../components/StudentCard';
 import StudentProfileModal from '../components/StudentProfileModal';
 import AttendanceMarkerModal from '../components/AttendanceMarkerModal';
+import BackButton from '../components/BackButton'; // ← ADD THIS
 import { classes, students as studentsData } from '../data/mockData';
 import { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,6 +13,7 @@ import { Camera } from 'lucide-react';
 import SparkleOverlay from '../components/SparkleOverlay';
 import Spinner from '../components/Spinner';
 import { useAttendance } from '../context/AttendanceContext';
+
 
 export default function StudentAttendance() {
     const { classId } = useParams();
@@ -69,7 +71,6 @@ export default function StudentAttendance() {
 
     return (
         <div className="min-h-screen bg-gradient-to-tr from-white via-blue-50 to-purple-100 relative">
-            <Header />
             <SparkleOverlay count={15} />
 
             <motion.main
@@ -78,6 +79,11 @@ export default function StudentAttendance() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ type: "spring", bounce: 0.5 }}
             >
+                {/* Back Button */}
+                <div className="w-full max-w-4xl mb-6 flex justify-start px-2">
+                    <BackButton to="/" label="← Back to Home" />
+                </div>
+
                 <div className="bg-white/60 backdrop-blur-lg shadow-xl rounded-3xl max-w-4xl w-full mx-auto px-8 py-6 relative z-20">
                     {/* Header */}
                     <div className="flex w-full justify-between items-center mb-6 px-2">

@@ -1,6 +1,5 @@
-// src/components/AttendanceMarkerModal.jsx
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Camera } from 'lucide-react';
 import WebcamFeed from './WebcamFeed';
 
 export default function AttendanceMarkerModal({ student, isOpen, onClose, onCapture }) {
@@ -13,86 +12,70 @@ export default function AttendanceMarkerModal({ student, isOpen, onClose, onCapt
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50"
+          className="fixed inset-0 bg-gradient-to-br from-blue-800/80 via-black/80 to-purple-800/90 flex items-center justify-center p-4 z-50 backdrop-blur"
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.92, opacity: 0, y: 24 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 32 }}
+            transition={{ type: "spring", stiffness: 340, damping: 28 }}
             onClick={e => e.stopPropagation()}
-            style={{
-              background: "white",
-              borderRadius: "20px",
-              padding: "32px",
-              maxWidth: "600px",
-              width: "100%",
-              position: "relative",
-            }}
+            className="relative bg-white rounded-3xl shadow-2xl w-full max-w-xl p-0 overflow-hidden border-2 border-indigo-100"
           >
+            {/* Close Button */}
             <button
               onClick={onClose}
-              style={{
-                position: "absolute",
-                top: "16px",
-                right: "16px",
-                background: "#f3f4f6",
-                border: "none",
-                cursor: "pointer",
-                padding: "8px",
-                borderRadius: "6px",
-              }}
+              className="absolute top-3 right-3 bg-white/80 hover:bg-indigo-200 text-indigo-800 font-bold rounded-lg p-2 shadow transition"
+              aria-label="Close"
             >
-              <X size={24} />
+              <X size={26} />
             </button>
-            <div style={{
-              marginBottom: "24px",
-              borderBottom: "2px solid #e5e7eb",
-              paddingBottom: "16px",
-              display: "flex",
-              alignItems: "center",
-              gap: "16px",
-            }}>
-              <img
-                src={student.photo}
-                alt={student.name}
-                style={{
-                  width: "64px",
-                  height: "64px",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                  border: "3px solid #818cf8",
-                }}
-              />
+            {/* Header */}
+            <div className="flex items-center gap-4 border-b-2 border-indigo-100 px-8 pt-7 pb-4 bg-gradient-to-r from-white via-indigo-50 to-indigo-100">
+              <div className="flex-shrink-0 relative">
+                <img
+                  src={student.photo}
+                  alt={student.name}
+                  className="w-16 h-16 rounded-full object-cover border-4 border-indigo-600 shadow-lg"
+                />
+                <span
+                  className={`absolute bottom-1 right-1 w-4 h-4 rounded-full border-2 border-white ${
+                    student.present ? "bg-green-500 shadow-md" : "bg-red-500"
+                  }`}
+                />
+              </div>
               <div>
-                <h2 style={{ fontSize: "24px", fontWeight: "bold", margin: 0 }}>
+                <h2 className="text-2xl font-extrabold text-indigo-900">
                   {student.name}
                 </h2>
-                <p style={{ fontSize: "14px", color: "#666", margin: "4px 0 0 0" }}>
+                <div className="text-xs font-mono text-gray-600">
                   ID: {student.id}
-                </p>
+                </div>
+                {/* Attendance status indicator */}
+                <div className="mt-1 flex items-center gap-1">
+                  <span className={`inline-block w-2 h-2 rounded-full ${student.present ? "bg-green-500" : "bg-gray-400"}`} />
+                  <span className={`text-xs font-bold uppercase ${student.present ? "text-green-600" : "text-gray-500"}`}>
+                    {student.present ? "Present" : "Absent"}
+                  </span>
+                </div>
               </div>
             </div>
-            {/* This below part integrates WebcamFeed exactly as you asked */}
-            <WebcamFeed
-              onCapture={() => {
-                if (onCapture) onCapture(student.id);
-                onClose();
-              }}
-              onClose={onClose}
-            />
-            <div
-              style={{
-                background: "#dbeafe",
-                borderLeft: "4px solid #3b82f6",
-                padding: "16px",
-                borderRadius: "4px",
-                marginTop: "18px"
-              }}
-            >
-              <p style={{ color: "#1e3a8a", fontWeight: "600", margin: 0 }}>
-                📷 Click "Start Camera" → Position your face → Click "Mark & Capture"
-              </p>
+            {/* WebcamFeed Section */}
+            <div className="px-8 py-7 flex flex-col items-center">
+              <WebcamFeed
+                onCapture={() => {
+                  if (onCapture) onCapture(student.id);
+                  onClose();
+                }}
+                onClose={onClose}
+              />
+              <div className="w-full mt-6 bg-blue-50/90 border-l-4 border-blue-400 shadow-inner rounded-lg px-5 py-3 text-blue-900 font-semibold flex items-center gap-2">
+                <Camera size={19} className="text-blue-500" />
+                <span>
+                  Click <b>Start Camera</b> → Position face → <b>Mark &amp; Capture</b>
+                </span>
+              </div>
             </div>
           </motion.div>
         </motion.div>

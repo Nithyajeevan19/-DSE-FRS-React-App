@@ -3,13 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const icons = {
-  UserPlus,
-  UserCheck,
-  UserCog,
-  Users,
-  FileText,
-  Copy,
-  Power,
+  UserPlus, UserCheck, UserCog, Users, FileText, Copy, Power,
 };
 
 export default function DashboardCard({ card }) {

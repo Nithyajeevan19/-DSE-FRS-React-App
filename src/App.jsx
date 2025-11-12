@@ -15,7 +15,7 @@ import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext'; // Existing
 import { AttendanceProvider } from './context/AttendanceContext'; // NEW IMPORT
-
+import StudentList from './pages/StudentList'; // NEW IMPORT
 export default function App() {
   return (
     <AuthProvider>
@@ -59,6 +59,7 @@ export default function App() {
             <Route path="/detailed-report" element={<Placeholder title="Detailed Report" />} />
             <Route path="/duplicates" element={<Placeholder title="Duplicates" />} />
             <Route path="/logout" element={<Navigate to="/login" replace />} />
+             <Route path="/students" element={<StudentList />} /> {/* ← ADD THIS */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

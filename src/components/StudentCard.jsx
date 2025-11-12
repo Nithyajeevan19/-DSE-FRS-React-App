@@ -2,7 +2,7 @@
 import { MoreVertical, Camera } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function StudentCard({ student, onViewProfile, onMarkAttendance }) {
+export default function StudentCard({ student, onViewProfile, onMarkAttendance,getStudentHistory = () => [] }) {
     const isPresent = student.present;
     
     const cardVariants = {

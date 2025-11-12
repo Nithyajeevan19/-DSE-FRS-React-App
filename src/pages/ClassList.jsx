@@ -6,10 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import SparkleOverlay from '../components/SparkleOverlay';
+import BackButton from '../components/BackButton'; 
 
 export default function ClassList() {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
+  
   const filtered = classes.filter(
     c => c.name.toLowerCase().includes(query.toLowerCase()) || String(c.total).includes(query)
   );
@@ -24,14 +26,21 @@ export default function ClassList() {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ type: 'spring', delay: 0.19, bounce: 0.45 }}
       >
+        {/* ✅ FIXED: Changed to="/" */}
+        <div className="w-full max-w-7xl mb-6 flex justify-start">
+          <BackButton to="/" label="← Back to Home" />
+        </div>
+
         <h2 className="text-3xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-purple-400">
           Student Attendance
         </h2>
+
         <SearchBar
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search by class name"
         />
+
         <motion.div 
           className="w-full max-w-lg space-y-6 mt-8"
           initial="hidden"
@@ -52,6 +61,7 @@ export default function ClassList() {
           ))}
         </motion.div>
       </motion.main>
+
       <footer className="text-right text-xs text-gray-400 py-2 px-4 z-10 relative">
         V 1.0.6
       </footer>
